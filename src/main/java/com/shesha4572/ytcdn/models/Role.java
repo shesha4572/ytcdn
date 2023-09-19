@@ -1,2 +1,6 @@
-package com.shesha4572.ytcdn.models;public enum Role {
+package com.shesha4572.ytcdn.models;
+
+public enum Role {
+    USER,
+    ADMIN
 }
