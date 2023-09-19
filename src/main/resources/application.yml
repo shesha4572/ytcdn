@@ -1,0 +1,13 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+
+  data:
+    mongodb:
+      uri: ${MONGO_DB_URL}
+      database: ${MONGO_DB_NAME}
+      auto-index-creation: true
+
+
+server:
+  port: 8001
