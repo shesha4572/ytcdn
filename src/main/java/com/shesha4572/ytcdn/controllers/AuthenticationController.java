@@ -1,7 +1,6 @@
 package com.shesha4572.ytcdn.controllers;
 
 import com.shesha4572.ytcdn.models.AuthenticationRequest;
-import com.shesha4572.ytcdn.models.AuthenticationResponse;
 import com.shesha4572.ytcdn.models.RegisterRequest;
 import com.shesha4572.ytcdn.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) throws Exception{
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request){
         try {
             return ResponseEntity.ok(authenticationService.register(request));
         }
@@ -37,7 +36,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) throws Exception {
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
         try {
             return ResponseEntity.ok(authenticationService.login(request));
         }

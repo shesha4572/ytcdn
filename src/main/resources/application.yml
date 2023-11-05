@@ -7,7 +7,10 @@ spring:
       uri: ${MONGO_DB_URL}
       database: ${MONGO_DB_NAME}
       auto-index-creation: true
-
+  servlet:
+    multipart:
+      max-request-size: 64MB
+      max-file-size: 64MB
 
 server:
-  port: 8001
+  port: 8080
