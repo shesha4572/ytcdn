@@ -43,7 +43,7 @@ public class UploadService {
                 .thumbnailLink(videoDetails.getThumbnailLink())
                 .build();
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        headers.setContentType(MediaType.APPLICATION_JSON);
         Map<String , Object> requestBody = new HashMap<>();
         requestBody.put("fileName" , videoFile.getTitle());
         requestBody.put("fileId" , videoFile.getInternalFileId());
