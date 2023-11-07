@@ -70,7 +70,7 @@ public class CdnFileService {
             }
             if (endIndexRelative > remainingBytes) {
                 endIndexRelative = remainingBytes - 1 + startIndexRelative;
-                endIndex = 64000000L * (requiredChunk.getChunkIndex() + 1) - 1;
+                endIndex = startIndex + remainingBytes - 1;
             }
             log.info("Reading video #" + videoId + " Chunk #" + requiredChunk.getChunkId() + " Chunk Index #" + chunkIndex +  " Start = " + startIndexRelative + " End = " + endIndexRelative);
             RestTemplate restTemplate = new RestTemplate();
@@ -98,7 +98,7 @@ public class CdnFileService {
             assert requiredBytes != null;
             log.info(requiredBytes.contentLength() + " bytes read");
             HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_RANGE, "bytes " + startIndex + "-" + endIndex + "/" + fileInfo.getSize());
+            headers.add(HttpHeaders.CONTENT_RANGE, "bytes " + startIndex + "-" + ((startIndex + requiredBytes.contentLength() - 1)) + "/" + fileInfo.getSize());
             return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
                     .headers(headers)
                     .contentLength(requiredBytes.contentLength())
