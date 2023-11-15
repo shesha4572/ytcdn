@@ -43,7 +43,7 @@ public class UploadService {
                 .thumbnailLink(videoDetails.getThumbnailLink())
                 .build();
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        headers.setContentType(MediaType.APPLICATION_JSON);
         Map<String , Object> requestBody = new HashMap<>();
         requestBody.put("fileName" , videoFile.getTitle());
         requestBody.put("fileId" , videoFile.getInternalFileId());
@@ -83,7 +83,7 @@ public class UploadService {
         requestBody.add("file" , file.getResource());
         for (int i = 0; i < 3; i++) {
             HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(requestBody, headers);
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://" + uploadDetails.getPodNames().get(i) + SLAVE_SERVICE_URL + "/api/v1/slave/chunk/upload/" + params + i);
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://" + uploadDetails.getPodNames().get(i) + "." + SLAVE_SERVICE_URL + "/api/v1/slave/chunk/upload/" + params + i);
             log.info("Replica #" + (i + 1) + " of file chunk #" + uploadDetails.getChunkId() + " to pod " + uploadDetails.getPodNames().get(i));
             try {
                 ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(),
