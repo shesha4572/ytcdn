@@ -31,6 +31,7 @@ public class UserApp implements UserDetails {
 
     private String name;
 
+    @Indexed(unique = true)
     private String displayName;
 
     @Indexed(unique = true)
