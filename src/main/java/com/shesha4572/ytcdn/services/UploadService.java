@@ -43,6 +43,7 @@ public class UploadService {
                 .thumbnailLink(videoDetails.getThumbnailLink())
                 .viewCounter(0)
                 .ownerDisplayId(userName)
+                .likeCounter(0)
                 .build();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -34,6 +34,7 @@ public class ProfileService {
                         .viewCounter(videoFile.getViewCounter())
                         .uploadedOn(videoFile.getUploadedOn())
                         .ownerDisplayName(videoFile.getOwnerDisplayId())
+                        .likeCounter(videoFile.getLikeCounter())
                         .build()
         ));
         return ProfileDetails.builder()

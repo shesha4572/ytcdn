@@ -30,5 +30,6 @@ public class VideoFile {
     private String desc;
     private String thumbnailLink;
     private long viewCounter;
+    private long likeCounter;
 
 }

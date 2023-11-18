@@ -45,9 +45,21 @@ public class CdnVideoService {
                                 .viewCounter(videoFile.getViewCounter())
                                 .uploadedOn(videoFile.getUploadedOn())
                                 .ownerDisplayName(videoFile.getOwnerDisplayId())
+                                .likeCounter(videoFile.getLikeCounter())
                                 .build()
                 )
         );
         return results;
+    }
+
+    public Boolean incrementViewCount(String internalFileId) {
+        Optional<VideoFile> optionalVideoFile = videoFileRepository.findVideoFileByInternalFileId(internalFileId);
+        if(optionalVideoFile.isEmpty()){
+            return false;
+        }
+        VideoFile file = optionalVideoFile.get();
+        file.setViewCounter(file.getViewCounter() + 1);
+        videoFileRepository.save(file);
+        return true;
     }
 }

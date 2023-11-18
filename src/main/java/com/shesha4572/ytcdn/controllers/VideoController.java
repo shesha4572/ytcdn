@@ -26,6 +26,9 @@ public class VideoController {
     @GetMapping("/details/{videoId}")
     public ResponseEntity<SearchResult> getDetails(@PathVariable String videoId){
         VideoFile videoFile = cdnVideoService.getVideoDetails(videoId);
+        if(videoFile == null){
+            return ResponseEntity.notFound().build();
+        }
         SearchResult searchResult = SearchResult.builder()
                 .internalFileId(videoFile.getInternalFileId())
                 .desc(videoFile.getDesc())
@@ -34,10 +37,8 @@ public class VideoController {
                 .viewCounter(videoFile.getViewCounter())
                 .uploadedOn(videoFile.getUploadedOn())
                 .ownerDisplayName(videoFile.getOwnerDisplayId())
+                .likeCounter(videoFile.getLikeCounter())
                 .build();
-        if(videoFile == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok().body(searchResult);
     }
 
@@ -45,6 +46,14 @@ public class VideoController {
     public ResponseEntity<List<SearchResult>> getSearchResults(@PathVariable String searchString){
         List<SearchResult> results = cdnVideoService.getSearchResults(searchString);
         return ResponseEntity.ok().body(results);
+    }
+
+    @PostMapping("/view/{internalFileId}")
+    public ResponseEntity<?> incrementView(@PathVariable String internalFileId){
+        if(cdnVideoService.incrementViewCount(internalFileId)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.internalServerError().build();
     }
 
 }

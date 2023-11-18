@@ -20,4 +20,5 @@ public class SearchResult{
     private String thumbnailLink;
     private long viewCounter;
     private String ownerDisplayName;
+    private long likeCounter;
 }
