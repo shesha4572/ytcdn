@@ -56,11 +56,12 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        UserApp user = userRepository.findByUsername(request.getUsername()).orElseThrow();
         var jwt = jwtService.generateJwt(user);
         return AuthenticationResponse
                 .builder()
                 .token(jwt)
+                .displayName(user.getDisplayName())
                 .build();
     }
 }

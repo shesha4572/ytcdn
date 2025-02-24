@@ -26,7 +26,8 @@ public class UploadController implements SecureController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserApp user = (UserApp) authentication.getPrincipal();
         String ownerId = user.getUsername();
-        ResponseEntity<?> responseEntity = uploadService.initFileUpload(fileInitDetails , ownerId);
+        String ownerDisplayName = user.getDisplayName();
+        ResponseEntity<?> responseEntity = uploadService.initFileUpload(fileInitDetails , ownerId , ownerDisplayName);
         if(responseEntity == null){
             return ResponseEntity.internalServerError().build();
         }

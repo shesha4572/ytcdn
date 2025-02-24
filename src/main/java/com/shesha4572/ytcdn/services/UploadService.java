@@ -32,7 +32,7 @@ public class UploadService {
         this.videoFileRepository = videoFileRepository;
     }
 
-    public ResponseEntity<?> initFileUpload(FileInitDto videoDetails , String userId){
+    public ResponseEntity<?> initFileUpload(FileInitDto videoDetails , String userId , String userName){
         VideoFile videoFile = VideoFile.builder()
                 .internalFileId(RandomStringUtils.randomAlphanumeric(32))
                 .fileSizeBytes(videoDetails.getFileSize())
@@ -41,6 +41,9 @@ public class UploadService {
                 .ownerId(userId)
                 .desc(videoDetails.getDesc())
                 .thumbnailLink(videoDetails.getThumbnailLink())
+                .viewCounter(0)
+                .ownerDisplayId(userName)
+                .likeCounter(0)
                 .build();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
