@@ -63,14 +63,12 @@ public class CdnFileService {
                 int lastChunkSize = (int) (fileInfo.getSize() % 64000000);
                 remainingBytes = lastChunkSize - startIndexRelative;
             }
-            int endIndexRelative = 0;
+            int endIndexRelative = (int) (startIndexRelative + (endIndex - startIndex));
             if (endIndex == -1) {
-                endIndexRelative = startIndexRelative + 10000000;
-                endIndex = startIndex + 10000000;
+                endIndexRelative = remainingBytes - 1 + startIndexRelative;
             }
             if (endIndexRelative > remainingBytes) {
                 endIndexRelative = remainingBytes - 1 + startIndexRelative;
-                endIndex = startIndex + remainingBytes - 1;
             }
             log.info("Reading video #" + videoId + " Chunk #" + requiredChunk.getChunkId() + " Chunk Index #" + chunkIndex +  " Start = " + startIndexRelative + " End = " + endIndexRelative);
             RestTemplate restTemplate = new RestTemplate();

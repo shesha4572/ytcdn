@@ -1,6 +1,12 @@
-FROM maven:latest
+FROM maven:latest AS builder
 
 WORKDIR /cdn-backend
 COPY . .
 RUN mvn clean install -Dmaven.test.skip=true
-CMD mvn spring-boot:run
+
+FROM amazoncorretto:17-alpine
+WORKDIR /cdn-backend
+COPY --from=builder /cdn-backend/target/*.jar app.jar
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
