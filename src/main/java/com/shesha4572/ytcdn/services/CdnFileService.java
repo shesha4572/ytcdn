@@ -102,4 +102,8 @@ public class CdnFileService {
                     .contentLength(requiredBytes.contentLength())
                     .body(requiredBytes);
     }
+
+//    public ResponseEntity<Resource> getWholeFile(String resourceId){
+//
+//    }
 }

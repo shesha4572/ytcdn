@@ -21,4 +21,6 @@ public class SearchResult{
     private long viewCounter;
     private String ownerDisplayName;
     private long likeCounter;
+    private String mpdName;
+    private Boolean isPlayable;
 }

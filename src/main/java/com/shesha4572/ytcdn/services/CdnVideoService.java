@@ -62,4 +62,16 @@ public class CdnVideoService {
         videoFileRepository.save(file);
         return true;
     }
+
+    public Boolean setVideoPlayable(String internalFileId , String mpdName){
+        Optional<VideoFile> optionalVideoFile = videoFileRepository.findVideoFileByInternalFileId(internalFileId);
+        if(optionalVideoFile.isEmpty()){
+            return false;
+        }
+        VideoFile file = optionalVideoFile.get();
+        file.setMpdName(mpdName);
+        file.setIsPlayable(Boolean.TRUE);
+        videoFileRepository.save(file);
+        return true;
+    }
 }

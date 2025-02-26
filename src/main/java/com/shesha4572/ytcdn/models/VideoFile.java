@@ -31,5 +31,7 @@ public class VideoFile {
     private String thumbnailLink;
     private long viewCounter;
     private long likeCounter;
+    private String mpdName;
+    private Boolean isPlayable;
 
 }
