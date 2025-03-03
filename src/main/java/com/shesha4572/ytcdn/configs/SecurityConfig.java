@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/v3/**").permitAll()
                         .requestMatchers("/swagger-ui/**" , "/").permitAll()
                         .requestMatchers("/api/v1/video/**").permitAll()
+                        .requestMatchers("/api/v2/video/**").permitAll()
                         .requestMatchers("/api/v1/profile/**").permitAll()
                         .anyRequest().authenticated()
                 )
